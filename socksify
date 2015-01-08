@@ -1,0 +1,12 @@
+SOCKS_DIR="$(dirname $(dirname $(readlink -f ${BASH_SOURCE[0]})))/vendor/dante"
+SOCKS_DIR="$(dirname $(readlink -f ${BASH_SOURCE[0]}))/vendor/dante"
+
+export SOCKS_CONF="${SOCKS_DIR}/socks.conf"
+export SOCKS_LIBDIR="${SOCKS_DIR}/lib"
+export SOCKS_LIBRARY="${SOCKS_DIR}/lib/libdsocks.so"
+export SOCKS_USEFULLPATH="true"
+
+chmod +x ${SOCKS_DIR}/bin/socksify
+echo "Proxying requests via SOCKS5"
+
+exec ${SOCKS_DIR}/bin/socksify $*
